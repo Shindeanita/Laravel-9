@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuth;
+use App\Http\Controllers\AddMember;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,8 @@ Route::get('/logout',function(){
     }
     return redirect('login');
 });
+
+//Flash Session Route
+
+Route::view('addmember','addmember');
+Route::post('addUser',[AddMember::class,'addUser']);
