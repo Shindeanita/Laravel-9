@@ -19,3 +19,5 @@ HttpClient
 Session
   1) User Seesion
   2) Complete Login and Logout functionalities with session.
+  3) Flash Session- with add member view page 
+  4) Upload Profile - with add member form
