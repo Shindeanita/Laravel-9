@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
-
+use App\Http\Controllers\QueryBuilderController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,12 @@ Route::get('delete/{id}',[MemberController::class,'delete']);
 Route::get('update/{id}',[MemberController::class,'showData']);
 
 Route::post('edit',[MemberController::class,'updateData']);
+
+Route::get('query',[QueryBuilderController::class,'dbOperation']);
+//Route::view('queryPage','queryPage');
+
+//Aggregate Function
+
+Route::get('aggregate',[ProductController::class,'aggregateFunction']);
+
+

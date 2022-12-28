@@ -25,8 +25,15 @@ Session
  CRUD-Task
  In this I have done with basic create,read,update and delete operation with database.
  Here I have used the Model or Eloquent method to fetch the data from database.
+
 	1) List all the members - list.blade.php
 	2) Add Member - addmember.blade.php
 	3) Update - updatemember.blade.php
 	4) Delete - MemberConroller.php
 	5) Model - Member.php
+  6) QueryBuilder - QueryBuilderController.php and queryPage.blade.php 
+      -This file contains the code of  how to connect database without using model and also basic functionality insert,update,delete,count.
+  7) Aggregaet function - ProductController.php and aggregateFunc.balde.php
+    -This file contains the code for aggregate functionality on database query.
+
+
