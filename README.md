@@ -21,3 +21,12 @@ Session
   2) Complete Login and Logout functionalities with session.
   3) Flash Session- with add member view page 
   4) Upload Profile - with add member form
+  
+ CRUD-Task
+ In this I have done with basic create,read,update and delete operation with database.
+ Here I have used the Model or Eloquent method to fetch the data from database.
+	1) List all the members - list.blade.php
+	2) Add Member - addmember.blade.php
+	3) Update - updatemember.blade.php
+	4) Delete - MemberConroller.php
+	5) Model - Member.php
