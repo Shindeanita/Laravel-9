@@ -33,6 +33,7 @@ Session
   6) QueryBuilder - QueryBuilderController.php and queryPage.blade.php 
       -This file contains the code of  how to connect database without using model and also basic functionality insert,update,delete,count.
   7) Aggregaet function - ProductController.php and aggregateFunc.balde.php
-    -This file contains the code for aggregate functionality on database query.
+    -This file contains the code for aggregate function on database query.
+    -Here you can also find the join,leftjoin,right join example code.
 
 
