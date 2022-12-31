@@ -1,0 +1,42 @@
+About Migration what I understand about It:
+
+Migration:
+
+-> In laravel by using migration we can generate table from laravel code.
+-> Migration is needed when more than one developer working on project and they created different tables for the projects. Now when we combine the all the codes and table in one project that time we need to create tables manually one by one and that task is taking to much time and not feasible. 
+-> To overcome such problems we need migration.
+-> By using migration we can merge tables with database easily.
+
+
+1) Create migration we can use php artisan
+
+    >>php artisan make:migration create_tour_table
+
+
+this will create the one file under the ->database->migration folder with name date and name
+in that file we can define the structure of the table. we can add new columns and constraints on it.
+
+2) migrate table with database
+
+    - setup database configuration
+
+    >>php artisan migrate
+
+    - it will migrate all tables with database.
+
+3) reset the all previously migration
+
+    >>php artisan migrate:reset
+
+4) rollback last migrated table
+
+    >>php artisan migrate:rollback
+
+5) rollback step
+    >>php artisan migrate --step = 2
+    last 2 migrated data roallbacked.
+
+6) single file migration
+    >>php artisan migrate --path='/database/migration/<filename>
+
+
