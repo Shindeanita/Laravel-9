@@ -5,56 +5,62 @@
 <b>Topics are Included.</b>
 <ol>
 <li>API</li>
-  1) CRUD Operation with api
-  2) routes\api.php - for all routes
-  3) laravel sanctum authentication with api
-  4) For more detail read Readme.md file
-
+<ol>
+  <li> CRUD Operation with api
+  <li>routes\api.php - for all routes
+  <li> laravel sanctum authentication with api
+  <li> For more detail read Readme.md file
+</ol>
 
 <li>Accessor and Mutators</li>
-  1) Accessor - modify the data before display on html view page
-  2) Mutator -  modify data before store in database
-  3) Models\Member.php , app\http\controllers\MemberController - for accessor and mutator
-
+  <ol><li> Accessor - modify the data before display on html view page
+  <li> Mutator -  modify data before store in database
+  <li> Models\Member.php , app\http\controllers\MemberController - for accessor and mutator
+</ol>
 
 <li>CRUD-Task</li>
  In this I have done with basic create,read,update and delete operation with database.
  Here I have used the Model or Eloquent method to fetch the data from database.
-  1) List all the members - list.blade.php
-  2) Add Member - addmember.blade.php
-  3) Update - updatemember.blade.php
-  4) Delete - MemberConroller.php
-  5) Model - Member.php
-  6) QueryBuilder - QueryBuilderController.php and queryPage.blade.php 
+  <ol>
+  <li> List all the members - list.blade.php
+  <li> Add Member - addmember.blade.php
+  <li> Update - updatemember.blade.php
+  <li> Delete - MemberConroller.php
+  <li> Model - Member.php
+  <li> QueryBuilder - QueryBuilderController.php and queryPage.blade.php 
       -This file contains the code of  how to connect database without using model and also basic functionality insert,update,delete,count.
-  7) Aggregaet function - ProductController.php and aggregateFunc.balde.php
+  <li> Aggregaet function - ProductController.php and aggregateFunc.balde.php
     -This file contains the code for aggregate function on database query.
     -Here you can also find the join,leftjoin,right join example code.
-
+</ol>
 
 <li>HttpClient</li>
-  1) Use existing api and display in Table
-  2) Http Request Method - GET,POST,PUT,DELETE,PATCH
-
+<ol>
+  <li> Use existing api and display in Table
+  <li> Http Request Method - GET,POST,PUT,DELETE,PATCH
+</ol>
 
 <li>Migration and Seeding Example</li>
-  1) Migration for combine structre and seeding means insert
-  2) For more detaile read ReadMe.md file
-  
+  <ol>
+  <li> Migration for combine structre and seeding means insert
+  <li> For more detaile read ReadMe.md file
+  </ol>
 
 <li>Session</li>
-  1) User Seesion
-  2) Complete Login and Logout functionalities with session.
-  3) Flash Session- with add member view page 
-  4) Upload Profile - with add member form
-  
+ <ol>
+  <li> User Seesion
+  <li> Complete Login and Logout functionalities with session.
+  <li> Flash Session- with add member view page 
+  <li> Upload Profile - with add member form
+  </ol>
  
  <li>blog9</li>
-  1) Create Controller
-  2) Create Model
-  3) Form with validation
-  4) Basic of middleware
-  5) Database Configuration /Fetch Data
-  6) Model
-
+ <ol>
+  <li> Create Controller
+  <li> Create Model
+  <li> Form with validation
+  <li> Basic of middleware
+  <li> Database Configuration /Fetch Data
+  <li> Model
+</ol>
   </ol>
