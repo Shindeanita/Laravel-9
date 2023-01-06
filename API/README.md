@@ -9,18 +9,18 @@
 
 <h5>Steps to install and configure the Laravel Sanctum</h5>
 <ol>
-<li><b>Step 1: Install Laravel Sanctum via composer package manager</b></li>
+<li><b>Install Laravel Sanctum via composer package manager</b></li>
 <p> >>composer require laravel/sanctum
 
-<li><b>Step 2: Configure and publish laravel Sanctum</b></li>
+<li><b>Configure and publish laravel Sanctum</b></li>
 <p>>>php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"</p>
 The sanctum configuration file will be placed in your application's config directory.
 
-<li><b>Step 3: Run Database Migration</b></li>
+<li><b>Run Database Migration</b></li>
 you should run your database migrations. Sanctum will create one database table in which to store API tokens:
 <p>>>php artisan migrate</p>
 
-<li><b>Step 4: Utilize Sanctum to authenticate a SPA </b>
+<li><b>Utilize Sanctum to authenticate a SPA </b></li>
 if you plan to utilize Sanctum to authenticate a SPA, you should add Sanctum's middleware to your api middleware group within your application's app/Http/Kernel.php file:
 <pre>
 'api' => [
@@ -31,7 +31,7 @@ if you plan to utilize Sanctum to authenticate a SPA, you should add Sanctum's m
 </pre>
 
 
-<li><b>Step 5: To use token for user.</li>
+<li><b>To use token for user.</b></li>
 To begin issuing tokens for users, your User model should use the Laravel\Sanctum\HasApiTokens trait:
 <pre>use Laravel\Sanctum\HasApiTokens;
  
@@ -40,10 +40,10 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 }</pre>
 
-<li><b>Step 6:Let's create the seeder for the User model</b></li>
+<li><b>Let's create the seeder for the User model</b></li>
 <p>>>php artisan make:seeder UsersTableSeeder
 
-<li><b>Step 7:Now let's insert as record </b></li>
+<li><b>Now let's insert as record </b></li>
 Open application folder ->database->seeder->UsersTableSeeder.php
 <pre>
 use Illuminate\Support\Facades\DB;
@@ -56,10 +56,10 @@ DB::table('users')->insert([
     'password' => Hash::make('password')
 ]);</pre>
 
-<li><b>Step 8:To seed users table with user</b></li>
+<li><b>To seed users table with user</b></li>
 <p>>>php artisan db:seed --class=UsersTableSeeder </p>
 
-<li><b>Step 9:create controller and make routes/api.php for user login</b></li>
+<li><b>create controller and make routes/api.php for user login</b></li>
 <p>>>php artisan make:controller UserController </p>
 paste code:
 <pre><?php
@@ -97,7 +97,7 @@ class UserController extends Controller
 Route\api.php
 Route::post('login',[UserController::class,'index']);
 </pre>
-<li><b>Step 10: Test with postman, Result will be below</b></li>
+<li><b>Test with postman, Result will be below</b></li>
 <pre>
     {
     "user": {
@@ -111,7 +111,7 @@ Route::post('login',[UserController::class,'index']);
     "token": "AbQzDgXa..."
 }
 </pre>
-<li><b>Step 11: Make Details API or any other with secure route</b></li>
+<li><b>Make Details API or any other with secure route</b></li>
 <pre>
 Route::group(['middleware' => 'auth:sanctum'], function(){
     //All secure URL's
