@@ -38,6 +38,6 @@ in that file we can define the structure of the table. we can add new columns an
     last 2 migrated data roallbacked.
 
 <li> single file migration</li>
-    >>php artisan migrate --path='/database/migration/<filename>
+    >>php artisan migrate --path='/database/migration/<<filename>>
 
 </ol>
