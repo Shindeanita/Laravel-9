@@ -82,6 +82,5 @@ class DatabaseSeeder extends Seeder
 </pre>
 
 <li>Calling seeder</li>
-
->>php artisan db:seeder --class=UserSeeder
+    >>php artisan db:seeder --class=UserSeeder
 </ol>
