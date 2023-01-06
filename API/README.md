@@ -1,66 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h4>API</h4>
+<p>In this project you can find the following topics.
+<ol>
+    <li>Simple API
+    <li>Example of POST, GET, PUT, DELETE Methods
+    <li>Also find the apiResource method example
+    <li>API authentication with Laravel Sanctum
+</ol>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<h5>Steps to install and configure the Laravel Sanctum</h5>
+<ol>
+<li><b>Step 1: Install Laravel Sanctum via composer package manager</b></li>
+<p> >>composer require laravel/sanctum
 
-## About Laravel
+<li><b>Step 2: Configure and publish laravel Sanctum</b></li>
+<p>>>php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"</p>
+The sanctum configuration file will be placed in your application's config directory.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<li><b>Step 3: Run Database Migration</b></li>
+you should run your database migrations. Sanctum will create one database table in which to store API tokens:
+<p>>>php artisan migrate</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<li><b>Step 4: Utilize Sanctum to authenticate a SPA </b>
+if you plan to utilize Sanctum to authenticate a SPA, you should add Sanctum's middleware to your api middleware group within your application's app/Http/Kernel.php file:
+<pre>
+'api' => [
+    \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+    'throttle:api',
+    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+],
+</pre>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+<li><b>Step 5: To use token for user.</li>
+To begin issuing tokens for users, your User model should use the Laravel\Sanctum\HasApiTokens trait:
+<pre>use Laravel\Sanctum\HasApiTokens;
+ 
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
+}</pre>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<li><b>Step 6:Let's create the seeder for the User model</b></li>
+<p>>>php artisan make:seeder UsersTableSeeder
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<li><b>Step 7:Now let's insert as record </b></li>
+Open application folder ->database->seeder->UsersTableSeeder.php
+<pre>
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+...
+...
+DB::table('users')->insert([
+    'name' => 'John Doe',
+    'email' => 'john@doe.com',
+    'password' => Hash::make('password')
+]);</pre>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<li><b>Step 8:To seed users table with user</b></li>
+<p>>>php artisan db:seed --class=UsersTableSeeder </p>
 
-## Laravel Sponsors
+<li><b>Step 9:create controller and make routes/api.php for user login</b></li>
+<p>>>php artisan make:controller UserController </p>
+paste code:
+<pre><?php
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+namespace App\Http\Controllers;
 
-### Premium Partners
+use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+class UserController extends Controller
+{
+    // 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+    function index(Request $request)
+    {
+        $user= User::where('email', $request->email)->first();
+        // print_r($data);
+            if (!$user || !Hash::check($request->password, $user->password)) {
+                return response([
+                    'message' => ['These credentials do not match our records.']
+                ], 404);
+            }
+        
+             $token = $user->createToken('my-app-token')->plainTextToken;
+        
+            $response = [
+                'user' => $user,
+                'token' => $token
+            ];
+        
+             return response($response, 201);
+    }
+}
 
-## Contributing
+Route\api.php
+Route::post('login',[UserController::class,'index']);
+</pre>
+<li><b>Step 10: Test with postman, Result will be below</b></li>
+<pre>
+    {
+    "user": {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john@doe.com",
+        "email_verified_at": null,
+        "created_at": null,
+        "updated_at": null
+    },
+    "token": "AbQzDgXa..."
+}
+</pre>
+<li><b>Step 11: Make Details API or any other with secure route</b></li>
+<pre>
+Route::group(['middleware' => 'auth:sanctum'], function(){
+    //All secure URL's
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    });
 
-## Code of Conduct
+Route::post("login",[UserController::class,'index']);
+</pre>
+</ol>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Never put singin and sign up api routes inside the group of authentication.
