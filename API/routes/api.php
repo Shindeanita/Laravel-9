@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dummyApi;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FileController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,3 +41,4 @@ Route::post('testData',[dummyApi::class,'testData']);
 
 
 Route::post('login',[UserController::class,'index']);
+Route::post('upload',[FileController::class,'upload']);

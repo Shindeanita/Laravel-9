@@ -1,10 +1,11 @@
 <h4>API</h4>
 <p>In this project you can find the following topics.
 <ol>
-    <li>Simple API
-    <li>Example of POST, GET, PUT, DELETE Methods
-    <li>Also find the apiResource method example
-    <li>API authentication with Laravel Sanctum
+    <li>Simple API</li>
+    <li>Example of POST, GET, PUT, DELETE Methods - dummyApi.php</li>
+    <li>Also find the apiResource method example - dummyApi.php</li>
+    <li>Upload File with api - FileController.php </li>
+    <li>API authentication with Laravel Sanctum - UserController.php</li>
 </ol>
 
 <h5>Steps to install and configure the Laravel Sanctum</h5>
